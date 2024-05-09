@@ -39,13 +39,14 @@ module.exports = [
     url: '/api/question',
     method: 'get',
     response(ctx) {
-      const { url = '' } = ctx
+      const { url = '', query = {} } = ctx
       const isDeleted = url.indexOf('isDeleted=true') >= 0
       const isStar = url.indexOf('isStar=true') >= 0
+      const pageSize = parseInt(query.pageSize) || 10
       return {
           errno: 0,
           data: {
-            list: getQuestionList({ isDeleted, isStar}),
+            list: getQuestionList({ len: pageSize, isDeleted, isStar}),
             total: 100
           }
 
