@@ -38,15 +38,18 @@ module.exports = [
     //获取（查询）问卷列表
     url: '/api/question',
     method: 'get',
-    response() {
-        return {
-            errno: 0,
-            data: {
-              list: getQuestionList(),
-              total: 100
-            }
+    response(ctx) {
+      const { url = '' } = ctx
+      const isDeleted = url.indexOf('isDeleted=true') >= 0
+      const isStar = url.indexOf('isStar=true') >= 0
+      return {
+          errno: 0,
+          data: {
+            list: getQuestionList({ isDeleted, isStar}),
+            total: 100
+          }
 
-        }
+      }
     }
   }
 ]
