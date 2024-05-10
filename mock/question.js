@@ -52,5 +52,15 @@ module.exports = [
 
       }
     }
-  }
+  },
+  {
+    //更新问卷信息
+    url: '/api/question/:id',
+    method: 'patch',
+    response() {
+        return {
+            errno: 0,
+        }
+    }
+  },
 ]
